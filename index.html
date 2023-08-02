@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN" style="height: 100%">
+<head>
+  <meta charset="utf-8">
+</head>
+<body style="height: 100%; margin: 0">
+  <div id="container" style="height: 100%"></div>
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+  <script type="text/javascript">
+    var dom = document.getElementById('container');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+    var app = {};
+    
+    var option;
+
+       option = {
+          title: {
+              text: ' '
+          },
+  tooltip: {
+    trigger: 'axis',
+    axisPointer: {
+      type: 'cross',
+      crossStyle: {
+        color: '#59'
+      }
+    }
+  },
+  toolbox: {
+    feature: {
+      dataView: { show: true, readOnly: false },
+      magicType: { show: true, type: ['line', 'bar'] },
+      restore: { show: true },
+      saveAsImage: { show: true }
+    }
+  },
+  legend: {
+   padding:130,
+   right:'10',
+  },
+  xAxis: [
+    {
+      type: 'category',
+          data: ['2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022'],
+      axisPointer: {
+        type: 'shadow'
+      }
+    }
+  ],
+  yAxis: [
+    {
+      type: 'value',
+      min: 0,
+      max: 150,
+      interval: 30,
+      axisLabel: {
+        formatter: '{value} 美元/桶'
+      }
+    },
+  ],
+  series: [
+    {
+      name: 'WTI',
+      type: 'bar',
+      tooltip: {
+        valueFormatter: function (value) {
+          return value + ' 美元/桶';
+        }
+      },
+      data: [
+        56.64,66.05,72.34,99.67,61.95,79.48,94.88,94.05,97.98,93.17,48.72,43.58,50.84,64.90,56.99,39.68,68.17,94.53,
+      ]
+    },
+    {
+      name: 'Brent',
+      type: 'bar',
+      tooltip: {
+        valueFormatter: function (value) {
+          return value + ' 美元/桶';
+        }
+      },
+      data: [
+        54.57,65.16,72.44,96.94,61.74,79.61,111.26,111.57,108.56,98.97,53.03,45.13,54.71,71.34,64.28,41.96,70.86,100.93      ]
+    }
+  ]
+};
+
+
+    if (option && typeof option === 'object') {
+      myChart.setOption(option);
+    }
+
+    window.addEventListener('resize', myChart.resize);
+  </script>
+</body>
+</html>
